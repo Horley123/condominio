@@ -1,7 +1,7 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import React, {useState, createContext, useCallback} from 'react';
+import React from 'react';
 
 import {DefaultTheme, ThemeProvider as StyledProvider} from 'styled-components';
+
 import defaultTheme from './lightTheme';
 import darkTheme from './darkTheme';
 
@@ -10,12 +10,14 @@ interface IThemeContextData {
   theme: DefaultTheme;
 }
 
-const ThemeContext = createContext<IThemeContextData>({} as IThemeContextData);
+const ThemeContext = React.createContext<IThemeContextData>(
+  {} as IThemeContextData,
+);
 
 const ThemeProvider = ({children}: {children: React.ReactNode}) => {
   const [theme, setTheme] = React.useState(defaultTheme);
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme = React.useCallback(() => {
     setTheme(theme.title === 'light' ? darkTheme : defaultTheme);
   }, [theme]);
 
